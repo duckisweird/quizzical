@@ -14,6 +14,16 @@ export default function Quiz() {
         .then((data) => setQuizData(data.results))  
     }, [])
 
+
+    const buttonData = quizData.map(opt => {
+        const optionData = opt.incorrect_answers.concat(opt.correct_answer).toString()
+        const shuffledOptionData = optionData.sort(() => (Math.random() > .5) ? 1 : -1)
+
+        return (
+            <button className="quiz--btn">{decode(shuffledOptionData)}</button>
+        )
+    })
+    
     return (
         <div className="quiz">
             {quizData.map(arr => {
@@ -25,7 +35,11 @@ export default function Quiz() {
                     )})}
 
                    
-                {quizData.map(opt => <button className="quiz--btn">{decode(opt.correct_answer.concat(opt.incorrect_answers))}</button>)}  
+                
+        
+        {buttonData}
+                    
+                    
                             
                         
                     
@@ -34,3 +48,4 @@ export default function Quiz() {
         
     )
 }
+
