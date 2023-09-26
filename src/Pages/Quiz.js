@@ -25,7 +25,7 @@ export default function Quiz() {
                                 .sort(
                                     () => Math.random() - 0.5
                                 ),
-                            isHeld: false,
+                            isChecked: false,
                             selectedAnswer: "",
                             
                         });
@@ -62,7 +62,7 @@ export default function Quiz() {
                                 <li
                                 key={decode(ans)}
                                 id={decode(ans)}
-                                className={quest.isHeld ? "quiz--selected" : "quiz--opt"}
+                                className={quest.isChecked ? "quiz--selected" : "quiz--opt"}
                                 onClick={() => holdAnswer(quest.question, ans)}
                                 >
                                     {decode(ans)}
