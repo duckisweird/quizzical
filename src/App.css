@@ -50,8 +50,19 @@ body {
 
 
 .quiz--btn {
-    display: grid;
-    padding: 15px;
-    border-radius: 8px;
-    border-color: 1px solid #4D5B9E;
+    padding: 15px 20px;
+    margin: 15px;
+    border-radius: 20px;
+    background-color: #F5F7FB;
+    color: #293264;
+    border: 1px solid #4D5B9E;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+}
+
+.quiz--options {
+    display: flex;
+    justify-content: center;
 }
