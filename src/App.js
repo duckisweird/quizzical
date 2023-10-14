@@ -6,27 +6,28 @@ import Quiz from "./Pages/Quiz"
 
 
 
+
 export default function App() {
   
   const [quizStart, setQuizStart] = useState(false) 
   const [data, setData] = useState([])
   const [newQuiz, setNewQuiz] = useState(true)
 
-  async function getData() {
-    const dataFetch = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
-    const res = await dataFetch.json()
-    setData(() => res.results)
-  }
-
-
-  useEffect(() => {
+   useEffect(() => {
+    async function getData() {
+      const dataFetch = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+      const res = await dataFetch.json()
+      setData(res.results)
+    }
+  
     getData()
   }, [newQuiz])
 
+
+  console.log(data)
   return (
     <>
-    {quizStart ? <Quiz data={data}/> : <Start quizStart={quizStart} setQuizStart={setQuizStart}/>}
-
+    {quizStart ? <Quiz data={data} setData={setData}/> : <Start quizStart={quizStart} setQuizStart={setQuizStart}/>}
     </>
   )
 
