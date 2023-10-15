@@ -32,12 +32,11 @@ export default function Quiz({data, setData}) {
 
 
     function holdAnswer(quesID, ansID) { 
-        console.log(quesID)
        setData(prevData => {
         return prevData.map(quiz => {
             if (quiz.question.id === quesID) {
                 return {...quiz, answers: quiz.answers.map(ans => {
-                    return ans.id === ansID ? {...ans, isChecked: !ansID.isChecked} : {...ans, isChecked: false}
+                    return ans.id === ansID ? {...ans, isChecked: !ans.isChecked} : {...ans, isChecked: false}
                 })}
             } else return quiz
         })
