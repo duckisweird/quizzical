@@ -25,7 +25,8 @@ export default function Quiz({data, setData}) {
             )
         };
     });
-
+        
+    
     useEffect(() => {
         setData(dataStructure)              
     }, [reset])
