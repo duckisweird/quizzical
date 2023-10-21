@@ -33,9 +33,10 @@ export default function Quiz({data, setData}) {
 
     function holdAnswer(quesID, ansID) { 
        setData(prevData => {
-        return prevData.map(quiz => {
+        return prevData.map((quiz) => {
             if (quiz.question.id === quesID) {
-                return {...quiz, answers: quiz.answers.map(ans => {
+                return {...quiz,
+                     answers: quiz.answers.map(ans => {
                     return ans.id === ansID ? {...ans, isChecked: !ans.isChecked} : {...ans, isChecked: false}
                 })}
             } else return quiz
@@ -57,6 +58,7 @@ export default function Quiz({data, setData}) {
                                 <button
                                 key={ans.id}
                                 className={ans.isChecked ? "quiz--selected" : "quiz--btn"}
+                                holdAnswer={holdAnswer}
                                 onClick={() => holdAnswer(quest.question.id, ans.id)}
                                 >
                                     {decode(ans.text)}
