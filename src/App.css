@@ -39,6 +39,10 @@ body {
 
 /* QUIZ */
 
+.quiz {
+    text-align: center;
+}
+
 .quiz--question {
     text-align: center;
     padding: 70px;
@@ -78,4 +82,35 @@ body {
 .quiz--options {
     display: flex;
     justify-content: center;
+}
+
+.quiz--check {
+    padding: 20px 25px;
+    border-radius: 15px;
+    border: transparent;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #4D5B9E;
+    margin-top: 60px;
+}
+
+.quiz--score {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #293264;
+}
+
+.quiz--playAgain {
+    padding: 20px 25px;
+    border-radius: 15px;
+    border: transparent;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #4D5B9E;
+    margin-top: 30px;
 }
