@@ -54,46 +54,74 @@ export default function Quiz() {
 
 
     function holdAnswer(quesID, ansID) { 
-       if (buttonClicked) {
-        return
-       }
-       setData((prevData) => {
-        return prevData.map((quiz) => {
-            if (quiz.id === quesID) {
-                return {...quiz,
-                     answers: quiz.answers.map((ans) => {
-                    return {...ans, isChecked: ans.id === ansID ? true : false}
-                })}
-            } else return quiz
-        })
-       })
-    }
-
-    const checkScore = () => {
-        data.forEach(quiz => {
-            quiz.answers.forEach(ans => {
-                if (ans.isChecked && ans.isCorrect) {
-                    setScore(prevScore => prevScore + 1)
-                }
+        if (buttonClicked) {
+            return
+        }
+        setData((prevData) => {
+            return prevData.map((quiz) => {
+                if (quiz.id === quesID) {
+                    return {...quiz,
+                        answers: quiz.answers.map((ans) => {
+                            return {...ans, isChecked: ans.id === ansID ? true : false}
+                        })}
+                    } else return quiz
+                })
             })
-        })
-        setResultShown(true)
-        setButtonClicked(true)
-    }
+        }
 
-    const styles = (buttonClicked) = {
+        const checkScore = () => {
+            data.forEach(quiz => {
+                quiz.answers.forEach(ans => {
+                    if (ans.isChecked && ans.isCorrect) {
+                        setScore(prevScore => prevScore + 1)
+                    }
+                })
+            })
+            setResultShown(true)
+            setButtonClicked(true)
+        }
         
-    }
-   
+        function newGame() {
+            setResultShown(false)
+            setButtonClicked(false)
+            setScore(0)
+            setNewQuiz(oldState => !oldState)
+        }
+        
+        
+        const elementData = data.map((quest) => {
 
-    const elementData = data.map((quest) => {
-         return (
+        const styles = (ans, buttonClicked) => {
+            if (buttonClicked) {
+                if (ans.isCorrect) {
+                    return {
+                        backgroundColor: "#94D7A2",
+                        borderColor: "transparent"
+                    }
+                } else if (ans.isChecked && !ans.isCorrect) {
+                    return {
+                        backgroundColor: "#F8BCBC",
+                        borderColor: "transparent",
+                    }
+                } else {
+                    return {
+                        backgroundColor: "transparent",
+                        borderColor: "#94D7A2",
+                        opacity: 0.5
+                    }
+                }
+            }
+        }
+        
+
+        return (
             <div key={quest.id} >
                 <div className="quiz--question">{decode(quest.question)}</div>
 
                 <div className="quiz--options">
                     {quest.answers?.map((ans) => (
                         <button
+                        style={styles(ans, buttonClicked)}
                         key={ans.id}
                         className={ans.isChecked ? "quiz--selected" : "quiz--btn"}
                         onClick={() => holdAnswer(quest.id, ans.id)}
@@ -115,7 +143,7 @@ export default function Quiz() {
                 {resultShown ? 
                 <div className="quiz-results">
                     <div className="quiz--score">You scored {score}/5 correct answers</div>
-                    <button className="quiz--playAgain">Play Again</button> 
+                    <button className="quiz--playAgain" onClick={() => newGame()}>Play Again</button> 
                 </div>  
                     : 
                     <button className="quiz--check" onClick={() => checkScore()}>Check Answers</button> 
